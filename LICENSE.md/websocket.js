@@ -2,7 +2,7 @@
 wsFn() {
 	let that = this,
 		baseInfo = that.$store.state.baseInfo,
-		url = "ws://aicy.openspeech.cn/websocket/";
+		url = "";//websocket要连得url地址
 	if("WebSocket" in window) {
 		let ws = new WebSocket(url + baseInfo.memberId),
 			sot = null;
@@ -11,10 +11,9 @@ wsFn() {
 			// 如果断网了，ws.send会无法发送消息出去。ws.bufferedAmount不会为0。
 			if(ws.bufferedAmount === 0 && ws.readyState === 1) {
 				let req = {
+					//传的数据字段值
 					"data": {
-						"numberKey": baseInfo.memberId,
-						//frontmsgType,0:，1:心跳，2:
-						"fmt": 1
+						...
 					}
 				}
 				ws.send(JSON.stringify(req));
